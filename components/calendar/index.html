@@ -68,9 +68,9 @@ BpkCalendar(context)</code></pre><p class="bpk-text-3Di-q bpk-text--base-2akM8 b
   super.onViewCreated(view, savedInstanceState)
 
   val controller = ExampleBpkCalendarController(requireContext(), SelectionType.SINGLE)
-  
+
   view.findViewById&lt;BpkCalendar&gt;(R.id.bpkCalendar).setController(controller)
-}</code></pre><p class="bpk-text-3Di-q bpk-text--base-2akM8 bpk-docs-paragraph-MuObu">Notice the selection type is set in the <code>BpkCalendarController</code> constructor through the <code>selectionType</code> argument.</p><p class="bpk-text-3Di-q bpk-text--base-2akM8 bpk-docs-paragraph-MuObu">When <code>selectionType</code> is <code>SelectionType.RANGE</code> the calendar will allow a date range. 
+}</code></pre><p class="bpk-text-3Di-q bpk-text--base-2akM8 bpk-docs-paragraph-MuObu">Notice the selection type is set in the <code>BpkCalendarController</code> constructor through the <code>selectionType</code> argument.</p><p class="bpk-text-3Di-q bpk-text--base-2akM8 bpk-docs-paragraph-MuObu">When <code>selectionType</code> is <code>SelectionType.RANGE</code> the calendar will allow a date range.
 When <code>selectionType</code> is <code>SelectionType.SINGLE_DAY</code> the calendar will allow a single date.
 In both cases, the handling of the selection
  will be done in <code>onRangeSelected()</code> as in the example above.</p><p class="bpk-text-3Di-q bpk-text--base-2akM8 bpk-docs-paragraph-MuObu">Example of controller with disabled dates support:</p><pre class="bpk-code__pre-21zPA"><code class="bpk-code bpk-code--block-1PcDn">class ExampleBpkCalendarController(
@@ -94,7 +94,15 @@ In both cases, the handling of the selection
         greySet
       )
     )
-}</code></pre><p class="bpk-text-3Di-q bpk-text--base-2akM8 bpk-docs-paragraph-MuObu">For more examples see:</p><ul><li><a class="bpk-link-3ORvJ" href="https://github.com/Skyscanner/backpack-android/blob/master/app/src/main/java/net/skyscanner/backpack/demo/data/ExampleBpkCalendarController.kt">ExampleBpkCalendarController</a></li><li><a class="bpk-link-3ORvJ" href="https://github.com/Skyscanner/backpack-android/blob/master/Backpack/src/main/java/net/skyscanner/backpack/calendar/model/CalendarColoring.kt">CalendarColoring</a></li></ul><h4 class="bpk-text-3Di-q bpk-text--base-2akM8 bpkdocs-markdown-renderer__heading-4-39SdO" id="month-footer-views">Month footer views</h4><p class="bpk-text-3Di-q bpk-text--base-2akM8 bpk-docs-paragraph-MuObu"><code>BpkCalendar</code> supports adding a footer to each month to display additional information through the <code>BpkCalendarController.monthFooterAdapter</code> attribute.
+}</code></pre><p class="bpk-text-3Di-q bpk-text--base-2akM8 bpk-docs-paragraph-MuObu">For more examples see:</p><ul><li><a class="bpk-link-3ORvJ" href="https://github.com/Skyscanner/backpack-android/blob/master/app/src/main/java/net/skyscanner/backpack/demo/data/ExampleBpkCalendarController.kt">ExampleBpkCalendarController</a></li><li><a class="bpk-link-3ORvJ" href="https://github.com/Skyscanner/backpack-android/blob/master/Backpack/src/main/java/net/skyscanner/backpack/calendar/model/CalendarColoring.kt">CalendarColoring</a></li></ul><h4 class="bpk-text-3Di-q bpk-text--base-2akM8 bpkdocs-markdown-renderer__heading-4-39SdO" id="labeled-buckets">Labeled buckets</h4><p class="bpk-text-3Di-q bpk-text--base-2akM8 bpk-docs-paragraph-MuObu">Labeled buckets are used to add some extra text to each calendar cell.</p><p class="bpk-text-3Di-q bpk-text--base-2akM8 bpk-docs-paragraph-MuObu">To define labels set the <code>calendarLabels</code> attribute in the calendar controller.</p><pre class="bpk-code__pre-21zPA"><code class="bpk-code bpk-code--block-1PcDn">class ExampleBpkCalendarController(
+  override val selectionType: SelectionType
+ ) : BpkCalendarController(selectionType) {
+  override val calendarLabels = mapOf(
+    LocalDate.of(2020, 11, 7) to CalendarLabel(text = &quot;£10&quot;, style = CalendarLabel.Style.PriceHigh),
+    LocalDate.of(2020, 11, 8) to CalendarLabel(text = &quot;£11&quot;, style = CalendarLabel.Style.PriceMedium),
+    LocalDate.of(2020, 11, 9) to CalendarLabel(text = &quot;£12&quot;, style = CalendarLabel.Style.PriceLow),
+  )
+}</code></pre><p class="bpk-text-3Di-q bpk-text--base-2akM8 bpk-docs-paragraph-MuObu">For more examples see:</p><ul><li><a class="bpk-link-3ORvJ" href="https://github.com/Skyscanner/backpack-android/blob/master/app/src/main/java/net/skyscanner/backpack/demo/data/ExampleBpkCalendarController.kt">ExampleBpkCalendarController</a></li><li><a class="bpk-link-3ORvJ" href="https://github.com/Skyscanner/backpack-android/blob/master/Backpack/src/main/java/net/skyscanner/backpack/calendar/model/CalendarLabel.kt">CalendarLabel</a></li></ul><h4 class="bpk-text-3Di-q bpk-text--base-2akM8 bpkdocs-markdown-renderer__heading-4-39SdO" id="month-footer-views">Month footer views</h4><p class="bpk-text-3Di-q bpk-text--base-2akM8 bpk-docs-paragraph-MuObu"><code>BpkCalendar</code> supports adding a footer to each month to display additional information through the <code>BpkCalendarController.monthFooterAdapter</code> attribute.
 We provide <code>HighlightedDaysAdapter</code> to add a footer listing days you want to highlight for each month.</p><p class="bpk-text-3Di-q bpk-text--base-2akM8 bpk-docs-paragraph-MuObu">Example of controller with holidays support:</p><pre class="bpk-code__pre-21zPA"><code class="bpk-code bpk-code--block-1PcDn">class ExampleBpkCalendarController(
   override val selectionType: SelectionType
  ) : BpkCalendarController(selectionType) {
@@ -122,7 +130,7 @@ We provide <code>HighlightedDaysAdapter</code> to add a footer listing days you 
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 <!-- End Google Analytics -->
 
-<script src="/docs_3b3ace66f54b6b83d936.js" async></script>
+<script src="/docs_9cb6e93fb84d31ceda5a.js" async></script>
 
 </body>
 
